@@ -882,3 +882,136 @@ h1,h2,h3,h4,h5,
   .form-modal-head { padding-bottom: 18px; }
   .form-modal-body { padding: 18px; }
 }
+
+/* ================================================================
+   Refinamento final — hierarquia, leitura mobile e etapas
+   ================================================================ */
+/* Títulos: alinhamento editorial à esquerda em todas as telas. */
+h1, h2, h3, h4, h5,
+.sec > .env > .rotulo,
+.sec > .env > h2,
+.sec-cab,
+.sec-cab h2,
+.sobre-grade > div > .rotulo,
+.sobre-grade > div > h2,
+.cta-grade h2,
+.cta-grade .rotulo,
+.form h3,
+.form-modal-head h2 {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Texto corrido: justificado, última linha sempre à esquerda.
+   Não força quebra de palavras nem cria hifens artificiais. */
+.corpo p, .corpo li,
+.faq details p,
+.sec-cab p,
+.hero-sub, .lead,
+.dest-txt p:not(.oab-linha):not(.rotulo),
+.sobre-grade p:not(.rotulo):not(.destaque),
+.contato-zap p,
+.cta-grade p,
+.cta > .env > p:not(.rotulo),
+.rod-marca p, .rod-aviso,
+.form-regra, .form-aviso,
+.passo p {
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Evita que parágrafos muito estreitos produzam rios de espaços. */
+.sec-cab p,
+.hero-sub,
+.lead,
+.corpo p,
+.corpo li,
+.faq details p,
+.passo p { max-width: 68ch; }
+
+/* Etapas: cada etapa é uma unidade visual independente. */
+.passos { gap: 1rem; }
+.passo {
+  border: 1px solid var(--borda-f);
+  border-left: 3px solid var(--verde);
+  padding: 1.35rem 1.4rem 1.4rem;
+  background: rgba(255,255,255,.025);
+}
+.passo:last-child { padding-bottom: 1.4rem; border-left-color: var(--verde); }
+.passo::before { display:none; }
+.passo::after {
+  margin: 0 0 .7rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.passo h4 { margin:0; font-size:1.05rem; line-height:1.35; }
+.passo p { margin-top:.55rem; line-height:1.68; max-width:50ch; }
+
+.sec-mar .passo { border-color:rgba(239,237,230,.2); border-left-color:var(--ouro); }
+.sec-mar .passo:last-child { border-left-color:var(--ouro); }
+
+@media (min-width:900px){
+  .passos { grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; }
+  .passo {
+    border-left:0;
+    border-top:1px solid rgba(239,237,230,.28);
+    border-right:1px solid rgba(239,237,230,.18);
+    padding:1.55rem 1.45rem 1.2rem;
+  }
+  .passo:first-child { border-left:1px solid rgba(239,237,230,.18); }
+  .sec-branca .passo,.sec-papel .passo { border-top-color:var(--borda-f); border-right-color:var(--borda-f); }
+  .sec-branca .passo:first-child,.sec-papel .passo:first-child { border-left-color:var(--borda-f); }
+  .passo:last-child { border-left:0; border-right:0; border-top-color:rgba(239,237,230,.28); }
+  .sec-branca .passo:last-child,.sec-papel .passo:last-child { border-top-color:var(--borda-f); }
+}
+
+@media (max-width:639px){
+  /* Mobile: títulos à esquerda e corpo confortável, sem aparência de texto espremido. */
+  .sec > .env > .rotulo,
+  .sec > .env > h2,
+  .sec-cab,
+  .sec-cab h2,
+  .sobre-grade > div > .rotulo,
+  .sobre-grade > div > h2,
+  .cta-grade h2,
+  .cta-grade .rotulo { text-align:left; }
+
+  .corpo p, .corpo li,
+  .faq details p,
+  .sec-cab p,
+  .hero-sub, .lead,
+  .dest-txt p:not(.oab-linha):not(.rotulo),
+  .sobre-grade p:not(.rotulo):not(.destaque),
+  .contato-zap p,
+  .cta-grade p,
+  .cta > .env > p:not(.rotulo),
+  .passo p {
+    text-align:justify;
+    text-align-last:left;
+    hyphens:manual;
+    -webkit-hyphens:manual;
+    word-break:normal;
+    overflow-wrap:normal;
+    max-width:none;
+  }
+
+  .sec-cab p { margin-top:.9rem; }
+
+  .passos { margin-top:2rem; gap:.85rem; }
+  .passo {
+    padding:1.15rem 1.1rem 1.2rem;
+    border:1px solid var(--borda-f);
+    border-left:3px solid var(--verde);
+    background:rgba(255,255,255,.035);
+  }
+  .sec-mar .passo { border-left-color:var(--ouro); }
+  .passo::after { font-size:1.15rem; margin-bottom:.55rem; }
+  .passo h4 { font-size:1rem; }
+  .passo p { font-size:.97rem; line-height:1.7; }
+}
