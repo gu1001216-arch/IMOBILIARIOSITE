@@ -32,6 +32,39 @@
   window.addEventListener("scroll", aoRolar, { passive: true });
   aoRolar();
 
+  /* ── Mega menu desktop: mantém aberto durante a transição do mouse ── */
+  var itensSub = document.querySelectorAll(".tem-sub");
+  Array.prototype.forEach.call(itensSub, function (item) {
+    var fecharTimer = null;
+    function abrirSub() {
+      if (window.innerWidth < 1040) return;
+      if (fecharTimer) clearTimeout(fecharTimer);
+      item.classList.add("menu-aberto");
+    }
+    function agendarFecho() {
+      if (window.innerWidth < 1040) return;
+      if (fecharTimer) clearTimeout(fecharTimer);
+      fecharTimer = setTimeout(function () {
+        item.classList.remove("menu-aberto");
+      }, 280);
+    }
+    item.addEventListener("mouseenter", abrirSub);
+    item.addEventListener("mouseleave", agendarFecho);
+    item.addEventListener("focusin", abrirSub);
+    item.addEventListener("focusout", function (e) {
+      if (!item.contains(e.relatedTarget)) agendarFecho();
+    });
+
+    var link = item.querySelector(":scope > a");
+    if (link) {
+      link.addEventListener("click", function () {
+        if (window.innerWidth >= 1040) {
+          item.classList.add("menu-aberto");
+        }
+      });
+    }
+  });
+
   /* ── Menu lateral ── */
   var btnMenu = document.getElementById("btnMenu");
   var gaveta = document.getElementById("gaveta");
@@ -201,7 +234,7 @@
         status.textContent = "Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.";
       })
       .then(function () {
-        if (botao) { botao.disabled = false; botao.textContent = botao.getAttribute("data-rotulo") || "Enviar mensagem"; }
+        if (botao) { botao.disabled = false; botao.textContent = botao.getAttribute("data-rotulo") || "Enviar minha solicitação"; }
       });
   }
 

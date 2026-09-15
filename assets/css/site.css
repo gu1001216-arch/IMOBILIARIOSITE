@@ -39,7 +39,7 @@ img{max-width:100%;display:block}
 a{color:var(--verde);text-decoration-thickness:1px;text-underline-offset:3px}
 a:hover{color:var(--teal)}
 h1,h2,h3,h4,h5{margin:0;font-family:var(--serif);font-weight:500;letter-spacing:-.01em;color:var(--tinta);text-wrap:pretty}
-p{margin:0;text-wrap:pretty}
+p{margin:0;text-wrap:pretty;hyphens:none;-webkit-hyphens:none;word-break:normal;overflow-wrap:normal}
 ul{margin:0;padding:0}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 ::selection{background:var(--verde);color:var(--papel)}
@@ -67,7 +67,7 @@ ul{margin:0;padding:0}
 .cab.desceu .marca img{height:clamp(28px,3.2vw,34px)}
 
 .nav-d{display:none;margin-left:auto}
-.nav-d>ul{display:flex;align-items:center;gap:clamp(1rem,2vw,2rem);list-style:none}
+.nav-d>ul{display:flex;align-items:center;gap:clamp(.85rem,1.6vw,1.65rem);list-style:none}
 .nav-d>ul>li{position:relative}
 .nav-d>ul>li>a{
   display:block;padding:.6rem 0;font:500 .875rem/1 var(--sans);color:#3D3A34;
@@ -77,13 +77,15 @@ ul{margin:0;padding:0}
 .nav-d>ul>li>a:hover,.nav-d .tem-sub:hover>a{color:var(--verde);border-color:var(--verde)}
 
 .mega{
-  position:absolute;top:calc(100% + 14px);left:50%;transform:translate(-50%,8px);
+  position:absolute;top:100%;left:50%;transform:translate(-50%,8px);
   display:grid;grid-template-columns:repeat(4,minmax(170px,1fr));gap:2rem;
   padding:1.9rem 2.1rem;background:var(--branca);border:1px solid var(--borda);
   box-shadow:0 30px 60px -38px rgba(20,25,22,.5);
   opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,transform .28s,visibility .28s;
 }
 .tem-sub:hover .mega,.tem-sub:focus-within .mega{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+/* Área invisível de ligação entre o menu e o mega menu. Impede que o submenu feche ao mover o mouse para baixo. */
+.mega::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
 .mega h5{margin:0 0 .85rem;font:600 .6875rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--suave)}
 .mega ul{list-style:none;display:grid;gap:.55rem}
 .mega a{font:400 .9rem/1.45 var(--sans);color:var(--tinta);text-decoration:none;transition:color .2s}
@@ -508,23 +510,29 @@ ul{margin:0;padding:0}
   text-align:justify;
   text-justify:inter-word;
   hyphens:none;
-  overflow-wrap:break-word;
+  -webkit-hyphens:none;
+  word-break:normal;
+  overflow-wrap:normal;
+  word-wrap:normal;
 }
 
 /* A marca ganha presença no desktop e fica centralizada no celular. */
 .cab-in{position:relative}
 .marca{position:absolute;left:50%;transform:translateX(-50%);z-index:2}
-.marca img{height:48px;width:auto;max-width:min(70vw,250px);object-fit:contain}
+.marca img{height:48px;width:auto;max-width:min(78vw,270px);object-fit:contain}
 
 /* Botões deixam explícito o caminho de contato. */
 .hero-btns .btn,
 .cta-btns .btn{min-width:250px}
-.cab-actions .cab-form{max-width:250px}
+.cab-actions .cab-form{min-width:235px;max-width:285px}
+.cab-actions .cab-zap{min-width:145px}
 
 /* Melhor leitura em telas pequenas: largura confortável e espaçamento equilibrado. */
 @media (max-width:639px){
-  .cab-in{min-height:76px;padding:12px var(--pad)}
-  .marca img{height:48px;max-width:72vw}
+  .cab-in{min-height:86px;padding:12px var(--pad)}
+  .marca img{height:56px;max-width:78vw}
+  .cab.desceu .cab-in{padding:12px var(--pad)}
+  .cab.desceu .marca img{height:56px;max-width:78vw}
   .ham{margin-left:auto;position:relative;z-index:3}
   .hero-btns,.cta-btns{display:grid;grid-template-columns:1fr;width:100%;gap:.7rem}
   .hero-btns .btn,.cta-btns .btn{width:100%;min-width:0;min-height:56px}
@@ -541,11 +549,195 @@ ul{margin:0;padding:0}
 @media (min-width:900px){
   .cab-in{position:relative}
   .marca{position:static;left:auto;transform:none}
-  .marca img{height:60px;max-width:none}
-  .cab.desceu .marca img{height:48px}
+  .marca img{height:68px;max-width:none}
+  .cab.desceu .marca img{height:68px}
+  .cab-actions .btn{min-height:48px;font-size:.8rem;padding:0 .9rem}
 }
 
 @media (min-width:1200px){
-  .marca img{height:64px}
-  .cab.desceu .marca img{height:50px}
+  .marca img{height:74px}
+  .cab.desceu .marca img{height:74px}
+  .cab-actions .btn{font-size:.85rem;padding:0 1.05rem}
+}
+
+@media (min-width:900px) and (max-width:1099px){
+  .cab-in{gap:1rem}
+  .nav-d>ul{gap:.8rem}
+  .cab-actions{gap:.4rem}
+  .cab-actions .cab-form{min-width:205px;max-width:215px}
+  .cab-actions .cab-zap{min-width:125px}
+  .cab-actions .btn{font-size:.74rem;padding:0 .65rem}
+}
+
+/* Hierarquia editorial: títulos e chamadas centralizados; textos corridos justificados. */
+.sec > .env > .rotulo, .sec > .env > h2, .sec-cab, .sec-cab h2, .sec-cab p, .sobre-grade > div > .rotulo, .sobre-grade > div > h2, .cta-grade h2, .cta-grade .rotulo { text-align:center; margin-left:auto; margin-right:auto; }
+.sec > .env > h2{max-width:30ch}
+.sec-cab{margin-left:auto;margin-right:auto}
+.frentes,.areas,.situacoes{margin-left:auto;margin-right:auto}
+@media (max-width:639px){
+  .sec > .env > h2{max-width:24ch}
+  .hero h1{text-wrap:balance}
+  .hero-sub,.lead{max-width:38rem;margin-left:auto;margin-right:auto;text-align:justify}
+  .sobre-grade > div .destaque{text-align:center}
+  .cta-grade > div > p:not(.rotulo){text-align:justify}
+}
+
+/* ================================================================
+   Auditoria final — clareza, conversão, responsividade e menu
+   ================================================================ */
+
+/* Texto editorial: justificado, mas a última linha permanece natural à esquerda. */
+.corpo p,
+.corpo li,
+.faq details p,
+.sec-cab p,
+.hero-sub,
+.lead,
+.dest-txt p:not(.oab-linha):not(.rotulo),
+.sobre-grade p:not(.rotulo):not(.destaque),
+.contato-zap p,
+.cta-grade p,
+.cta>.env>p:not(.rotulo),
+.rod-marca p,
+.rod-aviso,
+.form-regra,
+.form-aviso {
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  hyphens: none;
+  -webkit-hyphens: none;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Nunca hifenizar automaticamente palavras em títulos, navegação ou botões. */
+h1,h2,h3,h4,h5,
+.nav-d a,
+.mega a,
+.btn,
+.situacao b,
+.dir-q,
+.frente-txt strong,
+.area-txt h3,
+.faq summary {
+  hyphens: none;
+  -webkit-hyphens: none;
+  word-break: normal;
+}
+
+/* Marca: tamanho estável. No celular permanece grande mesmo ao rolar. */
+.marca img,
+.cab.desceu .marca img {
+  height: 74px;
+  width: auto;
+  max-width: min(42vw, 330px);
+  object-fit: contain;
+}
+
+/* Header com mais área de respiro para a marca. */
+.cab-in,
+.cab.desceu .cab-in {
+  min-height: 94px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Mega menu: área maior, estável e sem a “ponte” frágil que fazia o menu fechar. */
+.tem-sub { padding-bottom: 2px; }
+.mega {
+  z-index: 200;
+  width: min(960px, calc(100vw - 40px));
+  min-width: 760px;
+  max-width: calc(100vw - 40px);
+  border-radius: 2px;
+  transform: translate(-50%, 10px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+.tem-sub.menu-aberto .mega,
+.tem-sub:hover .mega,
+.tem-sub:focus-within .mega {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.tem-sub.menu-aberto > a { color: var(--verde); border-color: var(--verde); }
+.mega::before {
+  top: -24px;
+  height: 24px;
+}
+
+/* Botões com função explícita e área confortável. */
+.hero-btns .btn,
+.cta-btns .btn,
+.contato-compacto .btn { min-height: 58px; }
+.cab-actions .btn { min-height: 50px; }
+
+/* Formulário: hierarquia visual mais clara. */
+.form-modal-card { border-radius: 4px; }
+.form-modal-head p:last-child { max-width: 62ch; }
+.campo label { margin-bottom: .45rem; }
+.campo input,
+.campo select,
+.campo textarea { border-radius: 2px; }
+.form-status { min-height: 1.4em; }
+
+/* Desktop: não deixar o header espremido em resoluções intermediárias. */
+@media (min-width:900px) and (max-width:1039px) {
+  .nav-d,.cab-actions { display: none; }
+  .ham { display: flex; }
+}
+
+@media (min-width:1040px) {
+  .nav-d { display: block; }
+  .cab-actions { display: flex; }
+  .ham { display: none; }
+  .cab-in,
+  .cab.desceu .cab-in { min-height: 102px; }
+  .marca img,
+  .cab.desceu .marca img { height: 76px; max-width: 340px; }
+}
+
+@media (max-width:1039px) {
+  .nav-d { display: none; }
+  .cab-actions { display: none; }
+}
+
+@media (max-width:639px) {
+  .cab-in,
+  .cab.desceu .cab-in {
+    min-height: 92px;
+    padding: 8px var(--pad);
+  }
+  .marca img,
+  .cab.desceu .marca img {
+    height: 62px;
+    max-width: min(72vw, 290px);
+  }
+  .marca { left: 50%; }
+  .hero { padding-top: 30px; }
+  .hero h1 { max-width: 20ch; }
+  .hero-sub,
+  .lead,
+  .corpo p,
+  .corpo li,
+  .faq details p,
+  .sec-cab p,
+  .dest-txt p:not(.oab-linha):not(.rotulo),
+  .sobre-grade p:not(.rotulo):not(.destaque) {
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+  .btn { white-space: normal; line-height: 1.25; padding-top: .7rem; padding-bottom: .7rem; }
+  .hero-btns .btn,
+  .cta-btns .btn { min-height: 58px; }
+}
+
+@media (max-width:380px) {
+  .cab-in,
+  .cab.desceu .cab-in { min-height: 86px; padding-left: 16px; padding-right: 16px; }
+  .marca img,
+  .cab.desceu .marca img { height: 56px; max-width: 68vw; }
+  .hero h1 { font-size: 2rem; }
 }
