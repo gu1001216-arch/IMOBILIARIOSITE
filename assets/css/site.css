@@ -1015,3 +1015,152 @@ h1, h2, h3, h4, h5,
   .passo h4 { font-size:1rem; }
   .passo p { font-size:.97rem; line-height:1.7; }
 }
+
+/* =========================================================
+   AJUSTE FINAL DE HIERARQUIA E LEITURA — DESKTOP + MOBILE
+   Títulos sempre à esquerda; corpo justificado com última
+   linha à esquerda. Evita espaçamento visual irregular.
+   ========================================================= */
+.sec > .env > .rotulo,
+.sec > .env > h2,
+.sec-cab,
+.sec-cab h2,
+.sobre-grade > div > .rotulo,
+.sobre-grade > div > h2,
+.cta-grade h2,
+.cta-grade .rotulo,
+.form h3,
+.form-modal-head h2,
+.hero h1,
+.hero .rotulo,
+.dest-txt h1,
+.dest-txt h2,
+.corpo h2,
+.corpo h3,
+.corpo h4 {
+  text-align: left !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Corpo: justificação equilibrada e última linha à esquerda. */
+.corpo p,
+.corpo li,
+.faq details p,
+.sec-cab p,
+.hero-sub,
+.lead,
+.dest-txt p:not(.oab-linha):not(.rotulo),
+.sobre-grade p:not(.rotulo):not(.destaque),
+.contato-zap p,
+.cta-grade p,
+.cta > .env > p:not(.rotulo),
+.rod-marca p,
+.rod-aviso,
+.form-regra,
+.form-aviso,
+.passo p {
+  text-align: justify !important;
+  text-align-last: left !important;
+  text-justify: inter-word;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* No desktop, não estreitar excessivamente o texto: isso reduz os
+   "rios" de espaços criados pela justificação. */
+.sec-cab p,
+.hero-sub,
+.lead,
+.corpo p,
+.corpo li,
+.faq details p,
+.passo p {
+  max-width: 72ch;
+}
+
+/* Títulos de seção mantêm uma largura confortável e leitura editorial. */
+.sec > .env > h2,
+.sec-cab h2,
+.sobre-grade > div > h2,
+.cta-grade h2 {
+  max-width: 22ch;
+  line-height: 1.12;
+}
+
+/* Etapas: desktop legível, sem quatro colunas apertadas. */
+@media (min-width: 900px) {
+  .passos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .passo,
+  .sec-branca .passo,
+  .sec-papel .passo,
+  .sec-mar .passo {
+    border: 1px solid var(--borda-f);
+    border-left: 3px solid var(--verde);
+    padding: 1.5rem 1.5rem 1.45rem;
+  }
+  .sec-mar .passo { border-left-color: var(--ouro); }
+  .passo:last-child,
+  .sec-branca .passo:last-child,
+  .sec-papel .passo:last-child,
+  .sec-mar .passo:last-child {
+    border-right: 1px solid var(--borda-f);
+    border-top: 1px solid var(--borda-f);
+  }
+}
+
+/* Formulário: largura e leitura consistentes no desktop. */
+.form,
+.form-modal,
+.form-modal-inner {
+  text-align: left;
+}
+.form label,
+.form-modal label {
+  text-align: left;
+}
+
+@media (max-width: 899px) {
+  .sec > .env > .rotulo,
+  .sec > .env > h2,
+  .sec-cab,
+  .sec-cab h2,
+  .sobre-grade > div > .rotulo,
+  .sobre-grade > div > h2,
+  .cta-grade h2,
+  .cta-grade .rotulo,
+  .hero h1,
+  .dest-txt h1,
+  .dest-txt h2,
+  .corpo h2,
+  .corpo h3,
+  .corpo h4 {
+    text-align: left !important;
+  }
+
+  .corpo p,
+  .corpo li,
+  .faq details p,
+  .sec-cab p,
+  .hero-sub,
+  .lead,
+  .dest-txt p:not(.oab-linha):not(.rotulo),
+  .sobre-grade p:not(.rotulo):not(.destaque),
+  .contato-zap p,
+  .cta-grade p,
+  .cta > .env > p:not(.rotulo),
+  .passo p {
+    text-align: justify !important;
+    text-align-last: left !important;
+    max-width: none;
+  }
+
+  .passos {
+    grid-template-columns: 1fr;
+  }
+}
