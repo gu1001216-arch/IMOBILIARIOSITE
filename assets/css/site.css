@@ -489,3 +489,281 @@ ul{margin:0;padding:0}
   .cab,.gaveta,.veu,.zap-flut,.form-modal,.hero-btns,.cta-faixa{display:none!important}
   body{background:#fff}
 }
+
+
+/* ============================================================
+   VACCARI 2.0 — refinamento de marca + CRO
+   Camada de redesign: preserva componentes existentes e melhora
+   hierarquia, conversão, responsividade e percepção de autoridade.
+   ============================================================ */
+
+:root{
+  --env:1320px;
+  --pad:clamp(20px,4vw,64px);
+  --sec:clamp(64px,8vw,120px);
+  --papel:#F6F4EF;
+  --branca:#FFFFFF;
+  --verde:#17372E;
+  --teal:#0B675E;
+  --tinta:#17201D;
+  --texto:#4D514D;
+  --suave:#73766F;
+  --borda:#DEDCD4;
+  --borda-f:#D2D0C7;
+  --ouro:#9A7535;
+}
+
+/* Base */
+body{font-size:16px;line-height:1.72;background:var(--papel)}
+::selection{background:var(--verde);color:#fff}
+.env{max-width:var(--env)}
+a{transition:color .22s ease}
+h1,h2,h3,h4,h5{letter-spacing:-.025em}
+
+/* Header mais institucional e menos "template" */
+.cab{background:rgba(246,244,239,.96);border-bottom:1px solid rgba(23,55,46,.12)}
+.cab-in{min-height:76px;padding-top:14px;padding-bottom:14px}
+.marca img{height:42px}
+.nav-d>ul{gap:clamp(1rem,1.8vw,1.7rem)}
+.nav-d>ul>li>a{font-size:.84rem;letter-spacing:.005em}
+.cab-actions{gap:.5rem}
+.cab-actions .btn-claro{border-color:var(--borda-f)}
+.cab-actions .btn-zap{background:var(--verde)}
+.cab-actions .btn-zap:hover{background:#0F2922}
+
+/* Mega menu: mais arejado e com largura consistente */
+.mega{
+  min-width:min(1000px,calc(100vw - 40px));
+  grid-template-columns:repeat(4,1fr);
+  gap:1.8rem 2.3rem;
+  padding:2rem 2.2rem;
+  border-radius:2px;
+}
+.mega>div:last-child{grid-column:1/-1;border-top:1px solid var(--borda);padding-top:1rem}
+.mega h5{color:var(--ouro)}
+
+/* Botões */
+.btn{min-height:56px;border-radius:2px;padding:0 1.45rem;letter-spacing:-.005em}
+.btn-zap{background:var(--verde)}
+.btn-claro{border-color:#85877F}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-sm{min-height:44px}
+
+/* Hero: mais impacto sem parecer agressivo */
+.hero{
+  padding:clamp(48px,7vw,92px) 0 clamp(62px,8vw,110px);
+  background:
+    radial-gradient(circle at 92% 10%,rgba(154,117,53,.08),transparent 24rem),
+    var(--papel);
+}
+.hero .env,.hero-grade{
+  gap:clamp(42px,6vw,96px);
+}
+.hero-in{padding-bottom:.25rem}
+.olho{margin-bottom:1.35rem;color:var(--teal);font-size:.68rem}
+.hero h1{
+  font-size:clamp(2.65rem,5.1vw,4.55rem);
+  line-height:1.01;
+  max-width:15ch;
+  letter-spacing:-.045em;
+}
+.hero-sub,.lead{
+  margin-top:1.6rem;
+  max-width:60ch;
+  font-size:clamp(1.02rem,1.25vw,1.17rem);
+  line-height:1.72;
+}
+.hero-btns{margin-top:2.15rem;gap:.65rem}
+.hero-fig{margin-top:.25rem}
+.hero-fig img{
+  height:clamp(340px,43vw,590px);
+  box-shadow:0 28px 70px -46px rgba(20,30,25,.55);
+}
+.hero-fig figcaption{font-size:.63rem}
+
+/* Hero sem foto (páginas internas) */
+.hero-sem-foto{
+  padding-top:clamp(38px,5.5vw,70px);
+  padding-bottom:clamp(44px,6vw,78px);
+  border-bottom:1px solid var(--borda);
+}
+.hero-sem-foto h1{max-width:18ch;font-size:clamp(2.35rem,4.7vw,4rem)}
+.hero-sem-foto .hero-sub{max-width:62ch}
+
+/* Seções */
+.sec{padding:var(--sec) 0}
+.sec-branca{background:#fff}
+.sec-cab{max-width:65ch}
+.sec-cab h2,.corpo h2{
+  font-size:clamp(2rem,3.4vw,3rem);
+  line-height:1.08;
+}
+.sec-cab p{font-size:1.04rem;line-height:1.75}
+.rotulo{font-size:.66rem;letter-spacing:.2em}
+
+/* Cards: menos "caixinha", mais editorial */
+.areas{gap:1px;background:var(--borda);border:1px solid var(--borda)}
+.area{border:0;background:#fff}
+.area:hover{box-shadow:none;border-color:transparent;background:#FBFAF7}
+.area-fig{aspect-ratio:16/10}
+.area-txt{padding:1.55rem 1.55rem 1.7rem}
+.area-txt h3{font-size:1.12rem}
+.area-txt p{line-height:1.65}
+
+/* Situações: componente importante para tráfego pago */
+.situacoes,.dirs{border-radius:2px;overflow:hidden}
+.situacao,.dir{min-height:82px;padding:1.25rem 1.45rem}
+.situacao b,.dir-q{font-size:1rem}
+.situacao i,.dir-a{font-size:.64rem}
+
+/* Listas */
+.frentes{margin-top:3rem}
+.frente{padding:1.5rem .4rem}
+.frente:hover{padding-left:1rem}
+.frente-txt strong{font-size:1.18rem}
+
+/* Sobre: fotografia como elemento de autoridade */
+.dest{gap:clamp(40px,6vw,96px)}
+.dest-txt h2{font-size:clamp(2.2rem,3.7vw,3.2rem);line-height:1.04}
+.dest-txt p:not(.oab-linha):not(.rotulo){font-size:1.05rem;line-height:1.8}
+.oab-linha{font-size:.84rem;letter-spacing:.03em}
+.dest-fig-retrato,.sobre-fig{
+  max-width:480px;
+  aspect-ratio:4/5.35;
+  background:#EAE7DF;
+  box-shadow:24px 28px 70px -48px rgba(20,30,25,.6);
+}
+.dest-fig-retrato img,.sobre-fig img{
+  object-position:50% 17%;
+}
+.dest-fig-retrato::before,.sobre-fig::before{
+  content:"";
+  position:absolute;
+  left:-12px;
+  top:22px;
+  width:42%;
+  height:1px;
+  background:var(--ouro);
+  z-index:2;
+}
+.dest-fig-retrato::after,.sobre-fig::after{width:72px;height:5px}
+.destaque{font-size:1rem}
+
+/* Corpo: justificar textos longos, sem espaçamento artificial */
+.corpo p{
+  text-align:justify;
+  text-justify:inter-word;
+  hyphens:auto;
+  max-width:72ch;
+}
+.corpo h2,.corpo h3,.corpo .caixa{text-align:left}
+.corpo ul li,.corpo ol{max-width:72ch}
+
+/* Caixas */
+.caixa{border-left-width:2px;padding:1.5rem 1.7rem}
+
+/* Passos */
+.passos{margin-top:3.2rem}
+.passo h4{font-size:1rem}
+.passo p{line-height:1.65}
+
+/* CTA: forte, mas elegante */
+.cta,.cta-faixa{
+  position:relative;
+  overflow:hidden;
+  background:var(--verde);
+}
+.cta::after{
+  content:"";
+  position:absolute;
+  width:420px;height:420px;
+  right:-180px;top:-220px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:50%;
+  pointer-events:none;
+}
+.cta h2{font-size:clamp(2rem,3.4vw,3rem);max-width:20ch}
+.cta>.env>p:not(.rotulo){max-width:58ch}
+.cta-btns{gap:.65rem}
+.cta .btn-claro{
+  color:#fff;border-color:rgba(255,255,255,.55);
+}
+.cta .btn-claro:hover{background:#fff;color:var(--verde);border-color:#fff}
+
+/* Formulários */
+.form{background:#fff;border-color:var(--borda);box-shadow:0 18px 55px -48px rgba(20,30,25,.55)}
+.campo input,.campo select,.campo textarea{border-radius:2px;background:#fff}
+.campo input:focus,.campo select:focus,.campo textarea:focus{
+  box-shadow:0 0 0 3px rgba(11,103,94,.09);
+}
+
+/* Contato */
+.contato-zap{background:var(--verde)}
+.contato-zap .btn-zap-forte{background:#25D366}
+.contato-grade{gap:clamp(28px,4vw,56px)}
+
+/* Footer */
+.rod{padding-top:clamp(58px,7vw,92px)}
+.rod-grade{gap:clamp(32px,4vw,58px)}
+.rod h5{color:#EDEAE1}
+.rod-aviso{max-width:100ch}
+
+/* WhatsApp: menos invasivo */
+.zap-flut{background:#25D366;box-shadow:0 12px 34px -10px rgba(11,60,36,.55)}
+.zap-flut:hover{background:#20BE5B}
+
+/* Modal */
+.form-modal-card{border-radius:2px}
+.form-modal-head{padding-top:clamp(28px,4vw,42px)}
+.form-modal-body{padding-bottom:clamp(28px,4vw,42px)}
+
+/* Desktop */
+@media (min-width:900px){
+  .sobre-grade{grid-template-columns:.86fr 1.14fr}
+  .sobre-fig{max-width:480px}
+  .dest{grid-template-columns:1.05fr .95fr}
+  .dest-fig{order:2}
+}
+@media (min-width:1100px){
+  .cab-in{min-height:82px}
+  .areas{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (min-width:1560px){
+  .areas{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* Mobile: eliminar sensação de "site espremido" */
+@media (max-width:899px){
+  .hero{padding-top:38px}
+  .hero h1{font-size:clamp(2.35rem,11vw,3.5rem);max-width:15ch}
+  .hero-sub{font-size:1rem}
+  .hero-fig img{height:auto;aspect-ratio:16/11}
+  .dest-fig-retrato,.sobre-fig{max-width:420px;aspect-ratio:4/5.35}
+  .corpo p{text-align:left}
+  .mega{display:none}
+  .cab-actions{display:none}
+}
+@media (max-width:639px){
+  .cab-in{padding-left:20px;padding-right:20px}
+  .marca img{height:36px;max-width:210px}
+  .hero-btns{display:grid;grid-template-columns:1fr}
+  .hero-btns .btn{width:100%}
+  .hero-fig img{aspect-ratio:4/3}
+  .sec{padding:clamp(58px,14vw,78px) 0}
+  .sec-cab h2,.corpo h2{font-size:2rem}
+  .areas{display:grid;grid-template-columns:1fr}
+  .area-txt{padding:1.3rem}
+  .frente{grid-template-columns:auto 1fr;gap:1rem}
+  .frente-seta{display:none}
+  .situacao,.dir{min-height:72px;padding:1rem}
+  .situacao i,.dir-a{font-size:.58rem}
+  .cta-btns{display:grid;grid-template-columns:1fr}
+  .cta-btns .btn{width:100%}
+  .contato-compacto{padding:1.25rem}
+}
+
+/* Preferência por movimento reduzido */
+@media (prefers-reduced-motion:reduce){
+  .btn:hover,.zap-flut:hover{transform:none}
+}
