@@ -1,0 +1,106 @@
+
+/* ===== AJUSTE FINAL DE HIERARQUIA E LEITURA ===== */
+/* Títulos e rótulos sempre alinhados à esquerda. O conteúdo corrido é justificado. */
+.sec > .env > .rotulo,
+.sec > .env > h2,
+.sec-cab,
+.sec-cab h2,
+.sobre-grade > div > .rotulo,
+.sobre-grade > div > h2,
+.cta-grade h2,
+.cta-grade .rotulo,
+.hero h1,
+.dest-txt h1,
+.dest-txt h2,
+.corpo h2,
+.corpo h3,
+.corpo h4,
+.sec-cab p,
+.rotulo {
+  text-align: left !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.corpo p,
+.corpo li,
+.faq details p,
+.sec-cab p,
+.hero-sub,
+.lead,
+.dest-txt p:not(.oab-linha):not(.rotulo),
+.sobre-grade p:not(.rotulo):not(.destaque),
+.contato-zap p,
+.cta-grade p,
+.cta > .env > p:not(.rotulo),
+.passo p {
+  text-align: justify !important;
+  text-align-last: left !important;
+  hyphens: manual !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+/* A seção de etapas precisa respirar e ser escaneável. */
+#como .env > h2 {
+  max-width: 34ch !important;
+  margin-top: .75rem !important;
+  margin-bottom: 2rem !important;
+}
+
+#como .passos {
+  align-items: stretch;
+}
+
+#como .passo {
+  min-width: 0;
+}
+
+#como .passo h4 {
+  text-align: left !important;
+  margin-bottom: .65rem;
+  line-height: 1.25;
+}
+
+#como .passo p {
+  margin: 0;
+  line-height: 1.72;
+}
+
+@media (max-width: 899px) {
+  .sec > .env > .rotulo,
+  .sec > .env > h2,
+  .sec-cab,
+  .sec-cab h2,
+  .sobre-grade > div > .rotulo,
+  .sobre-grade > div > h2,
+  .cta-grade h2,
+  .cta-grade .rotulo,
+  .hero h1,
+  .dest-txt h1,
+  .dest-txt h2,
+  .corpo h2,
+  .corpo h3,
+  .corpo h4,
+  .sec-cab p,
+  .rotulo {
+    text-align: left !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #como .env > h2 {
+    max-width: 100% !important;
+    font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+    line-height: 1.18 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  #como .passos {
+    gap: .85rem;
+  }
+
+  #como .passo {
+    padding: 1.25rem 1.1rem !important;
+  }
+}
