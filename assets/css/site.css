@@ -1262,3 +1262,22 @@ h1,h2,h3,h4,h5,h6,.rotulo,.olho,.btn,.area h3,.dir-q,.hf-cab,.oab-linha{
   text-align:left !important; text-align-last:left !important;
   hyphens:none !important; -webkit-hyphens:none !important;
 }
+
+/* ================================================================
+   V17 — MEDIDA DE LINHA (legibilidade)
+   Alvo: 60–75 caracteres por linha. Textos pequenos precisam de
+   coluna mais curta, não mais longa.
+   ================================================================ */
+.rod-aviso{max-width:66ch}
+.form-aviso,.form-regra,.campo-full.form-aviso,.campo-full.form-regra{max-width:64ch}
+.lead{max-width:62ch}
+.corpo p,.corpo li,.dest-txt p,.caixa p,.faq details p,.sec-cab p{max-width:70ch}
+.hero-sub{max-width:54ch}
+.area p,.dir p,.passo p{max-width:48ch}
+
+/* No celular a coluna já é estreita: max-width não deve encolher mais */
+@media(max-width:760px){
+  .rod-aviso,.form-aviso,.form-regra,.lead,.corpo p,.corpo li,
+  .dest-txt p,.caixa p,.faq details p,.sec-cab p,.hero-sub,
+  .area p,.dir p,.passo p{max-width:100%}
+}
