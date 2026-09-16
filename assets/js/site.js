@@ -255,3 +255,22 @@
     });
   }
 })();
+
+/* Teste de hifenização em português.
+   Justificar sem hifenização produz espaços desproporcionais entre as
+   palavras. Só ativamos o justificado quando o navegador de fato hifeniza. */
+(function(){
+  try{
+    var d=document.createElement('div');
+    d.lang='pt-BR';
+    d.style.cssText='position:absolute;left:-9999px;top:-9999px;width:80px;'+
+      'font:16px serif;visibility:hidden;';
+    d.textContent='regularização administrativa propriedade usucapião';
+    document.documentElement.appendChild(d);
+    var semHifen=d.offsetHeight;
+    d.style.hyphens='auto'; d.style.webkitHyphens='auto'; d.style.msHyphens='auto';
+    var comHifen=d.offsetHeight;
+    document.documentElement.removeChild(d);
+    if(comHifen<semHifen) document.documentElement.classList.add('hifen-ok');
+  }catch(e){/* sem suporte: mantém alinhado à esquerda */}
+})();

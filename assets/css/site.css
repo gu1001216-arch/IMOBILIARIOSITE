@@ -1217,3 +1217,48 @@ p,li,.corpo p,.corpo li,.dest-txt p,.caixa p,.faq details p,
   hyphenate-limit-lines:2;          /* no máximo 2 linhas seguidas com hífen */
   text-wrap:auto;                   /* deixa o justificador trabalhar livre */
 }
+
+/* ================================================================
+   V16 — HERO SEM CORTE + ESPAÇAMENTO GARANTIDO
+   ================================================================ */
+
+/* 1) Foto do hero: proporção real da imagem (16:9). Sem altura fixa,
+      então o object-fit não tem o que recortar — a foto aparece inteira. */
+.hero-fig img{
+  height:auto !important;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  object-position:center;
+  width:100%;
+  display:block;
+}
+@media(max-width:700px){
+  .hero-fig img{aspect-ratio:16/10}   /* um pouco mais alta no celular */
+}
+
+/* 2) ESPAÇAMENTO: justifica só quando o navegador sabe hifenizar em
+      português. O teste roda no carregamento e marca <html>.
+      Sem hifenização, justificar abriria vãos — então fica à esquerda. */
+.hifen-ok p, .hifen-ok li,
+.hifen-ok .corpo p, .hifen-ok .corpo li, .hifen-ok .dest-txt p,
+.hifen-ok .caixa p, .hifen-ok .faq details p, .hifen-ok .sec-cab p,
+.hifen-ok .cta p, .hifen-ok .lead, .hifen-ok .rod-aviso,
+.hifen-ok .hero-sub, .hifen-ok .area p, .hifen-ok .passo p{
+  text-align:justify; text-align-last:left;
+  hyphens:auto; -webkit-hyphens:auto;
+  hyphenate-limit-chars:5 2 2;
+}
+/* padrão (sem hifenização disponível): esquerda, espaçamento natural */
+p, li, .corpo p, .corpo li, .dest-txt p, .caixa p, .faq details p,
+.sec-cab p, .cta p, .lead, .rod-aviso, .hero-sub, .area p, .passo p{
+  text-align:left;
+  text-align-last:left;
+  word-spacing:normal;
+  text-wrap:pretty;
+  overflow-wrap:break-word;
+}
+/* Títulos nunca justificam nem hifenizam, em qualquer cenário */
+h1,h2,h3,h4,h5,h6,.rotulo,.olho,.btn,.area h3,.dir-q,.hf-cab,.oab-linha{
+  text-align:left !important; text-align-last:left !important;
+  hyphens:none !important; -webkit-hyphens:none !important;
+}
