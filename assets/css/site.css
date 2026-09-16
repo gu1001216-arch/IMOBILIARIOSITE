@@ -1164,3 +1164,56 @@ h1, h2, h3, h4, h5,
     grid-template-columns: 1fr;
   }
 }
+
+/* ================================================================
+   V15 — TIPOGRAFIA FINAL
+   Justificado no celular e no PC. Hifenização ligada para fechar as
+   linhas sem abrir espaços. Última linha e títulos à esquerda.
+   ================================================================ */
+
+/* Títulos e rótulos: sempre à esquerda, nunca justificados, sem hífen */
+h1,h2,h3,h4,h5,h6,
+.rotulo,.hf-cab,.oab-linha,.dir-a,.area-n,.hf-n,.sc-num b,.sc-num span,
+.btn,.area h3,.dir-q,figcaption,label,th,summary{
+  text-align:left !important;
+  text-align-last:left !important;
+  hyphens:none !important; -webkit-hyphens:none !important;
+  word-spacing:normal !important;
+}
+
+/* Corpo de texto: justificado em TODA largura, com hifenização */
+p,li,
+.corpo p,.corpo li,.dest-txt p,.dest-txt li,.caixa p,.faq details p,
+.sec-cab p,.cta p,.lead,.rod-aviso,.hero-sub,.area p,.passo p,.dir p{
+  text-align:justify;
+  text-align-last:left;     /* última linha à esquerda */
+  hyphens:auto;             /* hífen no fim da linha evita espaços largos */
+  -webkit-hyphens:auto; -ms-hyphens:auto;
+  hyphenate-limit-chars:6 3 3;   /* só quebra palavra de 6+ letras */
+  overflow-wrap:break-word;
+  word-break:normal;
+  word-spacing:normal;
+}
+
+/* Itens de lista curtos e rótulos dentro de listas não justificam */
+.areas-cat a,.hero-frentes a,.rel a,.rod li,.mega a,.gaveta a,
+.dest-lista li,nav li,.migalha{
+  text-align:left !important; text-align-last:left !important;
+  hyphens:none !important; -webkit-hyphens:none !important;
+}
+
+/* Trechos muito estreitos ficam à esquerda: justificar ali abre espaço
+   mesmo com hífen (coluna curta demais para distribuir). */
+@media(max-width:360px){
+  p,li,.lead,.hero-sub,.area p{text-align:left;hyphens:auto}
+}
+
+/* V15.1 — hifenização mais ativa: fecha as linhas e elimina os espaços largos.
+   5 2 2 = quebra palavras de 5+ letras, deixando 2 antes e 2 depois do hífen. */
+p,li,.corpo p,.corpo li,.dest-txt p,.caixa p,.faq details p,
+.sec-cab p,.cta p,.lead,.rod-aviso,.hero-sub,.area p,.passo p{
+  hyphenate-limit-chars:5 2 2;
+  -webkit-hyphenate-limit-before:2; -webkit-hyphenate-limit-after:2;
+  hyphenate-limit-lines:2;          /* no máximo 2 linhas seguidas com hífen */
+  text-wrap:auto;                   /* deixa o justificador trabalhar livre */
+}
