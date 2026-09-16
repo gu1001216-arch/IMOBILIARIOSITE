@@ -274,3 +274,29 @@
     if(comHifen<semHifen) document.documentElement.classList.add('hifen-ok');
   }catch(e){/* sem suporte: mantém alinhado à esquerda */}
 })();
+
+/* Rodapé fixo do modal: o botão de envio é o último item do grid, então
+   position:sticky não tem área para deslizar. Movemos o bloco do botão
+   para fora da região que rola, como rodapé do card. Assim ele fica
+   sempre visível, inclusive em telas pequenas. */
+(function(){
+  function ancorarBotao(){
+    var card=document.querySelector('#formModal .form-modal-card');
+    if(!card || card.querySelector('.form-modal-foot')) return;
+    var btn=card.querySelector('button[type="submit"]');
+    if(!btn) return;
+    var bloco=btn.closest('.campo-full') || btn.parentElement;
+    var foot=document.createElement('div');
+    foot.className='form-modal-foot';
+    foot.appendChild(bloco);
+    card.appendChild(foot);
+    // o clique precisa continuar submetendo o formulário
+    var form=card.querySelector('form');
+    if(form && !btn.getAttribute('form') && form.id) btn.setAttribute('form', form.id);
+  }
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[data-open-form]')) setTimeout(ancorarBotao,30);
+  });
+  if(document.readyState!=='loading') ancorarBotao();
+  else document.addEventListener('DOMContentLoaded',ancorarBotao);
+})();
