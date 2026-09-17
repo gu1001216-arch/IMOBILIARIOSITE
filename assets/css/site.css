@@ -1458,3 +1458,79 @@ html body .campo-full.form-aviso{
   text-align:left !important; text-align-last:left !important;
   word-spacing:normal !important; hyphens:none !important;
 }
+
+/* ================================================================
+   V22 — LEGIBILIDADE E ACESSO
+   Alinhamento uniforme no celular + botões e menu mais evidentes.
+   Referência: leitura confortável para quem tem 40+ anos.
+   ================================================================ */
+
+/* 1) ALINHAMENTO UNIFORME NO CELULAR — inclusive o rodapé,
+      que era o último bloco ainda justificado. */
+@media(max-width:767px){
+  html body .rod p, html body .rod-marca p, html body .rod-aviso,
+  html body footer p, html body footer li{
+    text-align:left !important; text-align-last:left !important;
+    word-spacing:normal !important;
+  }
+}
+
+/* 2) TEXTO MAIOR E MAIS ESPAÇADO NO CELULAR */
+@media(max-width:767px){
+  body{font-size:17px; line-height:1.72}
+  p, li{font-size:1.02rem; line-height:1.72}
+  .lead{font-size:1.08rem}
+  .area p{font-size:.97rem}
+  .faq summary{font-size:1.04rem; padding-block:20px}
+  .campo label{font-size:.82rem}
+  .campo input,.campo select,.campo textarea{font-size:1.02rem; padding:14px 15px}
+}
+
+/* 3) BOTÕES EVIDENTES — alvo de toque generoso e contorno claro */
+.btn{min-height:52px; font-size:.92rem; letter-spacing:.02em}
+@media(max-width:767px){
+  .btn{min-height:56px; width:100%; justify-content:center; font-size:.98rem}
+  .hero-btns{gap:12px}
+  .hero-btns .btn{width:100%}
+}
+.btn-mar{border:2px solid var(--charcoal,#171a1b)}
+.btn-zap{border:2px solid transparent}
+.btn:focus-visible{outline:3px solid var(--bronze,#9b7740); outline-offset:3px}
+
+/* 4) MENU MOBILE MAIS VISÍVEL — o hambúrguer sozinho não é óbvio
+      para quem não usa muito site. Ganha rótulo e borda. */
+.ham{
+  width:auto !important; min-height:48px; padding:0 14px;
+  gap:9px; border:2px solid var(--charcoal,#171a1b) !important;
+  border-radius:3px; font-size:.78rem; font-weight:700;
+  letter-spacing:.09em; text-transform:uppercase;
+  color:var(--charcoal,#171a1b); background:transparent;
+}
+.ham::after{content:"MENU"; line-height:1}
+@media(max-width:400px){ .ham{padding:0 11px} .ham::after{content:"MENU"} }
+
+/* 5) ITENS DO MENU ABERTO — maiores e separados */
+.gaveta a{min-height:54px; font-size:1.06rem; padding:15px 0}
+.gaveta h5{font-size:.7rem; margin-top:28px}
+.gaveta .btn{min-height:56px; margin-top:10px}
+
+/* 6) LINKS DE ÁREA — alvo maior no toque */
+@media(max-width:767px){
+  .area{padding:20px 0}
+  .area h3{font-size:1.08rem}
+  .rel a{min-height:48px; display:inline-flex; align-items:center; font-size:.92rem}
+}
+
+/* V22.1 — links do rodapé com alvo de toque adequado (eram 16px) */
+@media(max-width:767px){
+  html body .rod li{margin-bottom:0}
+  html body .rod li a,
+  html body .rod-base a,
+  html body footer a{
+    display:inline-flex; align-items:center;
+    min-height:46px; padding:4px 0; font-size:.98rem;
+  }
+  html body .rod-base{gap:6px 20px}
+}
+/* link de pular para o conteúdo (acessibilidade) */
+a[href="#conteudo"],a[href="#main"],.skip-link{min-height:46px;display:inline-flex;align-items:center}
