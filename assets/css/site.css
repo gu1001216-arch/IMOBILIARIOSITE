@@ -1460,77 +1460,83 @@ html body .campo-full.form-aviso{
 }
 
 /* ================================================================
-   V22 — LEGIBILIDADE E ACESSO
-   Alinhamento uniforme no celular + botões e menu mais evidentes.
-   Referência: leitura confortável para quem tem 40+ anos.
+   V23 — TEXTO JUSTIFICADO EM TODAS AS TELAS
+   Justificado + última linha à esquerda + hifenização.
+   Sobrepõe as regras anteriores que alinhavam à esquerda no celular.
    ================================================================ */
 
-/* 1) ALINHAMENTO UNIFORME NO CELULAR — inclusive o rodapé,
-      que era o último bloco ainda justificado. */
+/* 1) Corpo de texto: justificado em qualquer largura */
+html body p,
+html body li,
+html body .corpo p, html body .corpo li,
+html body .dest-txt p:not(.oab-linha):not(.rotulo),
+html body .sobre-grade p:not(.rotulo):not(.destaque),
+html body .caixa p,
+html body .faq details p,
+html body .sec-cab p,
+html body .cta p, html body .cta-grade p,
+html body .cta > .env > p:not(.rotulo),
+html body .contato-zap p,
+html body .lead,
+html body .hero-sub,
+html body .area p,
+html body .passo p,
+html body .rod-aviso,
+html body .rod p,
+html body footer p{
+  text-align:justify !important;
+  text-align-last:left !important;      /* última linha à esquerda */
+  hyphens:auto !important;
+  -webkit-hyphens:auto !important;
+  -ms-hyphens:auto !important;
+  hyphenate-limit-chars:4 2 2;          /* quebra a partir de 4 letras */
+  -webkit-hyphenate-limit-before:2;
+  -webkit-hyphenate-limit-after:2;
+  overflow-wrap:break-word;
+  word-break:normal;
+  word-spacing:normal !important;
+  text-wrap:auto;                       /* não competir com a justificação */
+}
+
+/* 2) Nunca justificar: títulos, rótulos, botões, menus e textos curtos.
+      Justificar duas ou três palavras é o que cria os vãos absurdos. */
+html body h1, html body h2, html body h3, html body h4, html body h5, html body h6,
+html body .rotulo, html body .olho, html body .hf-cab, html body .oab-linha,
+html body .btn, html body button, html body label, html body summary,
+html body .area h3, html body .dir-q, html body .dir-a, html body .area-n,
+html body .form-regra, html body .form-aviso, html body .form-status,
+html body .migalha, html body nav li, html body nav a,
+html body .gaveta a, html body .mega a, html body .rel a,
+html body .rod li, html body .rod li a, html body .rod-base,
+html body .areas-cat a, html body .hero-frentes a,
+html body .dest-lista li, html body .sc-num b, html body .sc-num span,
+html body figcaption, html body th, html body td{
+  text-align:left !important;
+  text-align-last:left !important;
+  hyphens:none !important;
+  -webkit-hyphens:none !important;
+  word-spacing:normal !important;
+}
+
+/* 3) Mais caracteres por linha no celular = menos esticamento.
+      É a alavanca real contra o vão: quanto mais palavras cabem,
+      menos o navegador precisa distribuir espaço. */
 @media(max-width:767px){
-  html body .rod p, html body .rod-marca p, html body .rod-aviso,
-  html body footer p, html body footer li{
-    text-align:left !important; text-align-last:left !important;
-    word-spacing:normal !important;
+  html body p, html body li, html body .lead, html body .hero-sub,
+  html body .corpo p, html body .corpo li, html body .dest-txt p{
+    font-size:16.2px;
+    line-height:1.68;
+    letter-spacing:-.004em;   /* aperta levemente, cabe mais por linha */
+    max-width:100%;
   }
+  /* respiro lateral menor devolve largura útil ao texto */
+  html body .env{width:min(var(--max,1220px),calc(100% - 36px))}
+}
+@media(max-width:400px){
+  html body p, html body li, html body .corpo p{font-size:15.8px}
+  html body .env{width:calc(100% - 30px)}
 }
 
-/* 2) TEXTO MAIOR E MAIS ESPAÇADO NO CELULAR */
-@media(max-width:767px){
-  body{font-size:17px; line-height:1.72}
-  p, li{font-size:1.02rem; line-height:1.72}
-  .lead{font-size:1.08rem}
-  .area p{font-size:.97rem}
-  .faq summary{font-size:1.04rem; padding-block:20px}
-  .campo label{font-size:.82rem}
-  .campo input,.campo select,.campo textarea{font-size:1.02rem; padding:14px 15px}
-}
-
-/* 3) BOTÕES EVIDENTES — alvo de toque generoso e contorno claro */
-.btn{min-height:52px; font-size:.92rem; letter-spacing:.02em}
-@media(max-width:767px){
-  .btn{min-height:56px; width:100%; justify-content:center; font-size:.98rem}
-  .hero-btns{gap:12px}
-  .hero-btns .btn{width:100%}
-}
-.btn-mar{border:2px solid var(--charcoal,#171a1b)}
-.btn-zap{border:2px solid transparent}
-.btn:focus-visible{outline:3px solid var(--bronze,#9b7740); outline-offset:3px}
-
-/* 4) MENU MOBILE MAIS VISÍVEL — o hambúrguer sozinho não é óbvio
-      para quem não usa muito site. Ganha rótulo e borda. */
-.ham{
-  width:auto !important; min-height:48px; padding:0 14px;
-  gap:9px; border:2px solid var(--charcoal,#171a1b) !important;
-  border-radius:3px; font-size:.78rem; font-weight:700;
-  letter-spacing:.09em; text-transform:uppercase;
-  color:var(--charcoal,#171a1b); background:transparent;
-}
-.ham::after{content:"MENU"; line-height:1}
-@media(max-width:400px){ .ham{padding:0 11px} .ham::after{content:"MENU"} }
-
-/* 5) ITENS DO MENU ABERTO — maiores e separados */
-.gaveta a{min-height:54px; font-size:1.06rem; padding:15px 0}
-.gaveta h5{font-size:.7rem; margin-top:28px}
-.gaveta .btn{min-height:56px; margin-top:10px}
-
-/* 6) LINKS DE ÁREA — alvo maior no toque */
-@media(max-width:767px){
-  .area{padding:20px 0}
-  .area h3{font-size:1.08rem}
-  .rel a{min-height:48px; display:inline-flex; align-items:center; font-size:.92rem}
-}
-
-/* V22.1 — links do rodapé com alvo de toque adequado (eram 16px) */
-@media(max-width:767px){
-  html body .rod li{margin-bottom:0}
-  html body .rod li a,
-  html body .rod-base a,
-  html body footer a{
-    display:inline-flex; align-items:center;
-    min-height:46px; padding:4px 0; font-size:.98rem;
-  }
-  html body .rod-base{gap:6px 20px}
-}
-/* link de pular para o conteúdo (acessibilidade) */
-a[href="#conteudo"],a[href="#main"],.skip-link{min-height:46px;display:inline-flex;align-items:center}
+/* 4) Parágrafos muito curtos não justificam: com 1–2 linhas o
+      esticamento fica visível e não há ganho estético. */
+html body p:has(br:only-child){text-align:left !important}
