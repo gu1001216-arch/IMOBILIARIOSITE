@@ -378,6 +378,14 @@ function notificarEnvio(){
   var antigo=document.getElementById('avisoEnvio');
   if(antigo) antigo.remove();
 
+  // fecha o modal antes de mostrar a confirmação, senão o aviso
+  // fica atrás dele e o botão Fechar não recebe o clique
+  var m=document.getElementById('formModal');
+  if(m && !m.hidden){
+    var x=m.querySelector('[data-close-form]');
+    if(x) x.click(); else { m.hidden=true; m.setAttribute('aria-hidden','true'); }
+  }
+
   var fundo=document.createElement('div');
   fundo.id='avisoEnvio';
   fundo.className='aviso-envio';

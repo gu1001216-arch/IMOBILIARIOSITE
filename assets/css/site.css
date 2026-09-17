@@ -1331,123 +1331,12 @@ h1,h2,h3,h4,h5,h6,.rotulo,.olho,.btn,.area h3,.dir-q,.hf-cab,.oab-linha{
   }
 }
 
-/* ================================================================
-   V19 — MODAL DE CONTATO: caixa dentro da tela e botão sempre visível
-   Antes: caixa de 1283px em viewport de 844px — o botão "Enviar
-   mensagem" nascia fora da área visível.
-   ================================================================ */
-#formModal .form-modal-card{
-  max-height:calc(100dvh - 40px);
-  max-height:calc(100vh - 40px);
-  display:flex; flex-direction:column;
-  overflow:hidden;
-}
-/* o corpo rola; cabeçalho e botão ficam fixos */
-#formModal .form-modal-body,
-#formModal form{ overflow-y:auto; overscroll-behavior:contain; }
-#formModal form{ flex:1 1 auto; min-height:0; }
 
-/* botão de envio ancorado no rodapé da caixa */
-#formModal form .campo-full:last-of-type,
-#formModal form button[type="submit"]{ position:sticky; bottom:0; }
-#formModal form button[type="submit"]{
-  z-index:2; width:100%;
-  box-shadow:0 -14px 18px -12px rgba(0,0,0,.18);
-}
 
-/* largura conforme o padrão editorial (620–720px) */
-@media(min-width:900px){
-  #formModal .form-modal-card{width:min(700px,92vw);max-width:700px}
-}
-@media(max-width:560px){
-  #formModal .form-modal-card{max-height:calc(100dvh - 20px);width:calc(100vw - 20px)}
-}
 
-/* V19.1 — o rolamento precisa acontecer DENTRO do card, senão o sticky
-   do botão não tem referência e ele sai da tela no celular. */
-#formModal{overflow:hidden}
-#formModal .form-modal-card{
-  display:flex; flex-direction:column;
-  max-height:calc(100dvh - 24px); max-height:calc(100vh - 24px);
-  overflow:hidden;
-}
-#formModal .form-modal-head{flex:0 0 auto}
-#formModal form{
-  flex:1 1 auto; min-height:0; overflow-y:auto;
-  overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
-  padding-bottom:0;
-}
-#formModal form .campo-full:has(button[type="submit"]){
-  position:sticky; bottom:0; background:var(--white,#fbfaf6);
-  padding-block:12px; margin-top:4px; z-index:3;
-  box-shadow:0 -16px 20px -14px rgba(0,0,0,.22);
-}
-#formModal form button[type="submit"]{position:static;width:100%}
 
-/* V19.2 — força o card a ser flex e o form a encolher (rolando por dentro).
-   Sem isso o form mantém 1072px dentro de um card de 820px e o botão
-   de envio fica inacessível no celular. */
-html body #formModal.form-modal .form-modal-card{
-  display:flex !important; flex-direction:column !important;
-  max-height:calc(100dvh - 24px) !important; max-height:calc(100vh - 24px) !important;
-  overflow:hidden !important;
-}
-html body #formModal.form-modal .form-modal-head{flex:0 0 auto !important}
-html body #formModal.form-modal form.form{
-  flex:1 1 auto !important; min-height:0 !important; height:auto !important;
-  overflow-y:auto !important; overscroll-behavior:contain;
-}
-html body #formModal.form-modal form.form .campo-full:has(button[type="submit"]){
-  position:sticky !important; bottom:0 !important;
-  background:var(--white,#fbfaf6); padding-block:12px; z-index:3;
-  box-shadow:0 -16px 20px -14px rgba(0,0,0,.22);
-}
 
-/* V19.3 — o filho flex do card é .form-modal-body (não o form).
-   É ele que precisa encolher e rolar. */
-html body #formModal .form-modal-body{
-  flex:1 1 auto !important; min-height:0 !important;
-  overflow-y:auto !important; overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-}
-html body #formModal form.form{
-  overflow:visible !important; height:auto !important; flex:none !important;
-}
-html body #formModal form.form .campo-full:has(button[type="submit"]){
-  position:sticky !important; bottom:-1px !important;
-  background:var(--white,#fbfaf6); padding-block:12px; z-index:3;
-  box-shadow:0 -16px 20px -14px rgba(0,0,0,.22);
-}
 
-/* V19.4 — botão de envio como rodapé fixo do card (fora da área que rola) */
-html body #formModal .form-modal-foot{
-  flex:0 0 auto; padding:14px clamp(20px,4vw,34px) clamp(18px,3vw,26px);
-  background:var(--white,#fbfaf6); border-top:1px solid var(--line,#d8d5cd);
-}
-html body #formModal .form-modal-foot button[type="submit"]{width:100%;margin:0}
-html body #formModal .form-modal-foot .campo,
-html body #formModal .form-modal-foot .campo-full{margin:0;padding:0}
-
-/* V19.5 — sticky do botão precisa de referência de altura no grid pai.
-   Sem min-height no .form-grid, o item sticky não tem contra o que grudar. */
-html body #formModal .form-modal-body{position:relative}
-html body #formModal form.form,
-html body #formModal .form-grid{min-height:min-content}
-html body #formModal .form-grid > .campo-full:has(button[type="submit"]){
-  position:sticky !important; bottom:0 !important; z-index:5;
-  background:var(--white,#fbfaf6);
-  margin:6px 0 0; padding:12px 0 14px;
-  box-shadow:0 -18px 22px -14px rgba(0,0,0,.25);
-}
-html body #formModal .form-grid > .campo-full:has(button[type="submit"]) .btn{width:100%}
-
-/* V19.6 — rodapé fixo do modal (criado pelo JS) */
-html body #formModal .form-modal-foot{
-  flex:0 0 auto; padding:14px clamp(20px,4vw,34px) clamp(16px,2.6vw,24px);
-  background:var(--white,#fbfaf6); border-top:1px solid var(--line,#d8d5cd);
-}
-html body #formModal .form-modal-foot .campo-full{margin:0;padding:0;position:static;box-shadow:none}
-html body #formModal .form-modal-foot .btn{width:100%;margin:0}
 
 /* V20 — avisos do formulário nunca justificam (texto curto, coluna estreita) */
 html body .form-regra,
@@ -1593,85 +1482,61 @@ html body p:has(br:only-child){text-align:left !important}
   html body #contato{scroll-margin-top:84px}
 }
 
+
+
 /* ================================================================
-   V25 — ROLAGEM DO MODAL NO CELULAR
-   O conteúdo do modal precisa receber o gesto de toque; o fundo não.
+   MODAL DE CONTATO — implementação única
+   Desenho: o OVERLAY rola; o card cresce naturalmente. Não impor
+   altura fixa ao card nem rolagem interna — foi o que causava o
+   travamento no celular.
    ================================================================ */
-html body #formModal{
-  overscroll-behavior:contain;
-  touch-action:pan-y;                /* NÃO usar 'none': bloqueia o toque nos filhos */
-}
-html body #formModal .form-modal-card{
-  touch-action:pan-y;                /* o card aceita rolagem vertical */
-  overscroll-behavior:contain;
-}
-html body #formModal .form-modal-body{
-  touch-action:pan-y !important;
+#formModal.form-modal{
+  position:fixed; top:0; right:0; bottom:0; left:0;
+  z-index:140;
+  display:flex; align-items:flex-start; justify-content:center;
+  padding:14px 12px 28px;
+  background:rgba(18,21,19,.62);
+  overflow-y:auto;                     /* é aqui que a rolagem acontece */
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
-  overflow-y:auto !important;
-  scrollbar-width:thin;
+  touch-action:pan-y;                  /* nunca 'none': bloquearia os filhos */
 }
-/* campos não devem capturar o gesto de rolagem */
-html body #formModal .form-modal-body .campo,
-html body #formModal .form-modal-body .form,
-html body #formModal .form-modal-body .form-grid{touch-action:pan-y}
-html body #formModal textarea{touch-action:pan-y}
+#formModal[hidden]{display:none}
 
-/* corpo travado enquanto o modal está aberto */
-body[style*="position: fixed"]{overscroll-behavior:none}
+#formModal .form-modal-card{
+  width:100%; max-width:640px;
+  margin:auto 0;                       /* centraliza quando couber na tela */
+  background:var(--white,#fbfaf6);
+  border:1px solid var(--line,#d8d5cd);
+  max-height:none;                     /* sem teto: o overlay é que rola */
+  height:auto; overflow:visible;
+  display:block;
+  touch-action:pan-y;
+}
 
+#formModal .form-modal-body{ overflow:visible; height:auto; touch-action:pan-y; }
+#formModal .form, #formModal .form-grid{ overflow:visible; height:auto; }
+
+/* botão de envio: bloco normal no fim do formulário */
+#formModal .form-modal-foot{
+  padding:0 clamp(20px,3vw,36px) clamp(22px,3vw,30px);
+  background:transparent; border:0;
+}
+#formModal .form-modal-foot .campo,
+#formModal .form-modal-foot .campo-full{ margin:0; padding:0; position:static; box-shadow:none }
+#formModal .form-modal-foot .btn{ width:100%; margin:0 }
+#formModal .campo-full:has(button[type="submit"]){ position:static; box-shadow:none }
+
+/* campos confortáveis no toque; 16px evita o zoom automático do iOS */
 @media(max-width:767px){
-  html body #formModal{padding:10px}
-  html body #formModal .form-modal-card{
-    max-height:calc(100dvh - 20px); max-height:calc(100vh - 20px);
-    width:100%;
-  }
-  /* indica visualmente que há mais conteúdo abaixo */
-  html body #formModal .form-modal-body{
-    -webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 22px),transparent);
-    mask-image:linear-gradient(180deg,#000 calc(100% - 22px),transparent);
-  }
+  #formModal.form-modal{ padding:10px 10px 24px }
+  #formModal .form-modal-card{ max-width:100% }
+  #formModal .campo input,
+  #formModal .campo select,
+  #formModal .campo textarea{ font-size:16px; min-height:52px; padding:13px 14px }
+  #formModal .campo textarea{ min-height:120px }
+  #formModal .form-modal-foot .btn{ min-height:56px }
 }
 
-/* ================================================================
-   V26 — ROLAGEM POR TOQUE NO MODAL (correção definitiva)
-   'touch-action:none' num ancestral impede o gesto de rolagem nos
-   filhos. O fundo é contido por overscroll-behavior, não por bloqueio
-   de toque.
-   ================================================================ */
-html body #formModal{
-  touch-action:pan-y !important;
-  overscroll-behavior:contain;
-  overflow:hidden;
-}
-html body #formModal .form-modal-card{
-  touch-action:pan-y !important;
-  overscroll-behavior:contain;
-  display:flex; flex-direction:column;
-  max-height:calc(100dvh - 20px); max-height:calc(100vh - 20px);
-  overflow:hidden;
-}
-html body #formModal .form-modal-head{flex:0 0 auto}
-html body #formModal .form-modal-body{
-  flex:1 1 auto; min-height:0;
-  overflow-y:auto !important; overflow-x:hidden;
-  touch-action:pan-y !important;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior-y:contain;
-}
-/* nenhum descendente pode restringir o gesto vertical */
-html body #formModal .form-modal-body *,
-html body #formModal .form,
-html body #formModal .form-grid,
-html body #formModal .campo,
-html body #formModal input,
-html body #formModal select,
-html body #formModal textarea{touch-action:pan-y !important}
-
-/* o gradiente de máscara pode interferir na composição em alguns
-   navegadores Android — removido em favor de uma borda simples */
-html body #formModal .form-modal-body{
-  -webkit-mask-image:none !important; mask-image:none !important;
-  border-bottom:1px solid var(--line,#d8d5cd);
-}
+/* a confirmação fica acima de qualquer camada, inclusive do modal */
+#avisoEnvio.aviso-envio{ z-index:200 }
