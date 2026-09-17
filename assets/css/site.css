@@ -1540,3 +1540,55 @@ html body figcaption, html body th, html body td{
 /* 4) Parágrafos muito curtos não justificam: com 1–2 linhas o
       esticamento fica visível e não há ganho estético. */
 html body p:has(br:only-child){text-align:left !important}
+
+/* ================================================================
+   V24 — NOTIFICAÇÃO DE ENVIO + FORMULÁRIO NO CELULAR
+   ================================================================ */
+
+/* Confirmação visível após o envio */
+.aviso-envio{
+  position:fixed; inset:0; z-index:120;
+  display:flex; align-items:center; justify-content:center;
+  padding:22px; background:rgba(11,18,32,.55);
+  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+}
+.aviso-envio-card{
+  background:var(--white,#fbfaf6); border:1px solid var(--line,#d8d5cd);
+  border-top:3px solid var(--green,#1f5a40);
+  max-width:430px; width:100%; padding:30px 28px 26px; text-align:center;
+  box-shadow:0 30px 70px -28px rgba(11,18,32,.5);
+}
+.aviso-envio-icone{
+  width:56px; height:56px; margin:0 auto 16px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(31,90,64,.1); color:var(--green,#1f5a40);
+}
+.aviso-envio-icone svg{width:28px;height:28px}
+.aviso-envio-card h3{
+  margin:0 0 8px; font-size:1.34rem;
+  text-align:center !important; text-align-last:center !important;
+}
+.aviso-envio-card p{
+  margin:0 0 20px; color:var(--ink-soft,#51595b); font-size:.97rem;
+  text-align:center !important; text-align-last:center !important;
+  hyphens:none !important;
+}
+.aviso-envio-card .btn{width:100%; min-height:50px}
+
+/* Formulário no celular: campos maiores e rolagem confortável */
+@media(max-width:767px){
+  html body .form{padding:22px 18px; gap:16px}
+  html body .form .campo{gap:8px}
+  html body .form .campo input,
+  html body .form .campo select,
+  html body .form .campo textarea{
+    font-size:16px;               /* evita o zoom automático do iOS */
+    padding:14px 14px; min-height:52px;
+  }
+  html body .form .campo textarea{min-height:130px; resize:vertical}
+  html body .form .campo label{font-size:.84rem; margin-bottom:2px}
+  html body .form button[type="submit"]{min-height:56px; font-size:1rem; width:100%}
+  /* o toque para rolar não deve ser capturado pelos campos */
+  html body .form, html body .form .campo{touch-action:pan-y}
+  html body #contato{scroll-margin-top:84px}
+}

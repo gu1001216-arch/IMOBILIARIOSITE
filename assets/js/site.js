@@ -228,6 +228,7 @@
         status.className = "form-status ok";
         status.textContent = "Mensagem enviada. Você receberá um retorno em breve.";
         ev("formulario_envio", { situacao: dados["Situação"] || "", origem: form.id || "" });
+        notificarEnvio();
       })
       .catch(function () {
         status.className = "form-status erro";
@@ -300,3 +301,47 @@
   if(document.readyState!=='loading') ancorarBotao();
   else document.addEventListener('DOMContentLoaded',ancorarBotao);
 })();
+
+
+/* Notificação de envio: confirmação visível, centralizada, com foco
+   acessível. O texto discreto abaixo do formulário passava despercebido,
+   sobretudo no celular, onde o usuário já rolou a tela. */
+function notificarEnvio(){
+  var antigo=document.getElementById('avisoEnvio');
+  if(antigo) antigo.remove();
+
+  var fundo=document.createElement('div');
+  fundo.id='avisoEnvio';
+  fundo.className='aviso-envio';
+  fundo.setAttribute('role','alertdialog');
+  fundo.setAttribute('aria-modal','true');
+  fundo.setAttribute('aria-labelledby','avisoEnvioTitulo');
+
+  fundo.innerHTML =
+    '<div class="aviso-envio-card">' +
+      '<div class="aviso-envio-icone" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+        'stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
+      '</div>' +
+      '<h3 id="avisoEnvioTitulo">Mensagem enviada</h3>' +
+      '<p>Recebemos suas informações. Você receberá um retorno em breve no contato informado.</p>' +
+      '<button type="button" class="btn btn-mar" data-fechar-aviso>Fechar</button>' +
+    '</div>';
+
+  document.body.appendChild(fundo);
+  var anterior=document.activeElement;
+  var btn=fundo.querySelector('[data-fechar-aviso]');
+  if(btn) btn.focus();
+
+  function fechar(){
+    fundo.remove();
+    if(anterior && anterior.focus) anterior.focus();
+    document.removeEventListener('keydown', aoTeclar);
+  }
+  function aoTeclar(e){ if(e.key==='Escape') fechar(); }
+
+  fundo.addEventListener('click', function(e){
+    if(e.target===fundo || e.target.closest('[data-fechar-aviso]')) fechar();
+  });
+  document.addEventListener('keydown', aoTeclar);
+}
