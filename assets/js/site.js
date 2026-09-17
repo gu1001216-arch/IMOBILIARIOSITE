@@ -1,3 +1,71 @@
+
+/* Trava de rolagem do fundo compatível com toque.
+   iOS ignora body{overflow:hidden}: o fundo continua rolando e o conteúdo
+   do modal "prende". Aqui o corpo é fixado e o scroll devolvido ao final.
+   A posição é rastreada continuamente enquanto o corpo está livre, o que
+   sobrevive à sequência gaveta -> modal (destrava e trava de novo). */
+var _travaY = 0, _travas = 0;
+(function(){
+  function registrar(){
+    if(document.body.style.position !== 'fixed')
+      _travaY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
+  window.addEventListener('scroll', registrar, {passive:true});
+  document.addEventListener('DOMContentLoaded', registrar);
+  registrar();
+})();
+function travarFundo(){
+  _travas++;
+  if(_travas > 1) return;
+  var b = document.body;
+  b.style.position='fixed'; b.style.top=(-_travaY)+'px';
+  b.style.left='0'; b.style.right='0'; b.style.width='100%';
+  b.style.overflow='hidden';
+}
+function destravarFundo(){
+  _travas--;
+  if(_travas > 0) return;
+  _travas = 0;
+  var y = _travaY, b = document.body;
+  b.style.position=''; b.style.top=''; b.style.left='';
+  b.style.right=''; b.style.width=''; b.style.overflow='';
+  window.scrollTo(0, y);
+}
+function destravarFundo(){
+  _travas--;
+  if(_travas > 0) return;
+  _travas = 0;
+  var b = document.body;
+  b.style.position=''; b.style.top=''; b.style.left='';
+  b.style.right=''; b.style.width=''; b.style.overflow='';
+  window.scrollTo(0, _travaY);
+}
+function destravarFundo(){
+  if(!_travado) return;
+  // se ainda houver modal ou gaveta abertos, mantém travado
+  var m = document.getElementById('formModal');
+  var g = document.querySelector('.gaveta');
+  var aviso = document.getElementById('avisoEnvio');
+  var aberto = (m && !m.hidden) || (g && g.classList.contains('on')) || aviso;
+  if(aberto) return;
+  var b = document.body;
+  b.style.position=''; b.style.top=''; b.style.left='';
+  b.style.right=''; b.style.width=''; b.style.overflow='';
+  _travado = false;
+  window.scrollTo(0, _travaY);
+}
+function destravarFundo(){
+  _travas = Math.max(0, _travas - 1);
+  if(_travas > 0) return;
+  var b = document.body;
+  b.style.position = '';
+  b.style.top = '';
+  b.style.left = '';
+  b.style.right = '';
+  b.style.width = '';
+  b.style.overflow = '';
+  window.scrollTo(0, _travaY);
+}
 /* Vaccari Advocacia — comportamento compartilhado
    Menu lateral, mega menu, modal de contato, envio do formulário e eventos GA4. */
 (function () {
@@ -75,7 +143,7 @@
     gaveta.classList.add("aberta");
     if (veu) { veu.hidden = false; requestAnimationFrame(function () { veu.classList.add("ativo"); }); }
     if (btnMenu) btnMenu.setAttribute("aria-expanded", "true");
-    document.body.style.overflow = "hidden";
+    travarFundo();
     var a = gaveta.querySelector("a");
     if (a) setTimeout(function () { a.focus(); }, 120);
   }
@@ -88,7 +156,7 @@
       setTimeout(function () { veu.hidden = true; }, 350);
     }
     if (btnMenu) btnMenu.setAttribute("aria-expanded", "false");
-    if (!modalAberto()) document.body.style.overflow = "";
+    if (!modalAberto()) destravarFundo();
   }
 
   if (btnMenu) btnMenu.addEventListener("click", abrirMenu);
@@ -113,7 +181,7 @@
     modal.hidden = false;
     modal.setAttribute("aria-hidden", "false");
     requestAnimationFrame(function () { modal.classList.add("aberto"); });
-    document.body.style.overflow = "hidden";
+    travarFundo();
     ev("formulario_abrir", { origem: origem || "" });
     var campo = modal.querySelector("input,select,textarea");
     if (campo) setTimeout(function () { campo.focus(); }, 160);
@@ -124,7 +192,7 @@
     modal.classList.remove("aberto");
     modal.setAttribute("aria-hidden", "true");
     setTimeout(function () { modal.hidden = true; }, 300);
-    document.body.style.overflow = "";
+    destravarFundo();
     if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
   }
 

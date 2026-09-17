@@ -1592,3 +1592,44 @@ html body p:has(br:only-child){text-align:left !important}
   html body .form, html body .form .campo{touch-action:pan-y}
   html body #contato{scroll-margin-top:84px}
 }
+
+/* ================================================================
+   V25 — ROLAGEM DO MODAL NO CELULAR
+   O conteúdo do modal precisa receber o gesto de toque; o fundo não.
+   ================================================================ */
+html body #formModal{
+  overscroll-behavior:contain;
+  touch-action:none;                 /* o fundo não rola */
+}
+html body #formModal .form-modal-card{
+  touch-action:pan-y;                /* o card aceita rolagem vertical */
+  overscroll-behavior:contain;
+}
+html body #formModal .form-modal-body{
+  touch-action:pan-y !important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  overflow-y:auto !important;
+  scrollbar-width:thin;
+}
+/* campos não devem capturar o gesto de rolagem */
+html body #formModal .form-modal-body .campo,
+html body #formModal .form-modal-body .form,
+html body #formModal .form-modal-body .form-grid{touch-action:pan-y}
+html body #formModal textarea{touch-action:pan-y}
+
+/* corpo travado enquanto o modal está aberto */
+body[style*="position: fixed"]{overscroll-behavior:none}
+
+@media(max-width:767px){
+  html body #formModal{padding:10px}
+  html body #formModal .form-modal-card{
+    max-height:calc(100dvh - 20px); max-height:calc(100vh - 20px);
+    width:100%;
+  }
+  /* indica visualmente que há mais conteúdo abaixo */
+  html body #formModal .form-modal-body{
+    -webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 22px),transparent);
+    mask-image:linear-gradient(180deg,#000 calc(100% - 22px),transparent);
+  }
+}
