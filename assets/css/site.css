@@ -1540,3 +1540,47 @@ html body p:has(br:only-child){text-align:left !important}
 
 /* a confirmação fica acima de qualquer camada, inclusive do modal */
 #avisoEnvio.aviso-envio{ z-index:200 }
+
+/* ================================================================
+   CONSISTÊNCIA TIPOGRÁFICA DAS SEÇÕES
+   Os H2 de FAQ e do formulário ficavam menores que os demais porque
+   não estavam em .sec-cab nem em .corpo — caíam no tamanho base.
+   Resultado: a pergunta do FAQ (negrito) parecia maior que o título
+   acima dela, invertendo a hierarquia.
+   ================================================================ */
+.sec > .env > h2,
+.sec > .env.med > h2,
+.sec .env.med > .rotulo + h2{
+  font-size:clamp(1.7rem,2.9vw,2.4rem);
+  line-height:1.14;
+  margin:.7rem 0 0;
+}
+
+/* FAQ: a pergunta é subordinada ao título da seção */
+.faq summary{
+  font-family:var(--sans);
+  font-size:1.02rem;
+  font-weight:600;
+  letter-spacing:-.005em;
+}
+.faq details p{font-size:.97rem}
+
+/* Formulário: alinhar ao ritmo tipográfico do corpo da página */
+.form .campo input,
+.form .campo select,
+.form .campo textarea{font-size:16.5px}
+.form .campo label{
+  font-size:.74rem; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase;
+}
+.form button[type="submit"]{font-size:.95rem}
+.form .form-regra,
+.form .form-aviso{font-size:.84rem; line-height:1.6}
+
+@media(max-width:767px){
+  .sec > .env > h2, .sec > .env.med > h2{font-size:1.62rem}
+  .faq summary{font-size:1rem}
+  .form .campo input,
+  .form .campo select,
+  .form .campo textarea{font-size:16px}
+}
