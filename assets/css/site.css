@@ -1584,3 +1584,48 @@ html body p:has(br:only-child){text-align:left !important}
   .form .campo select,
   .form .campo textarea{font-size:16px}
 }
+
+/* ================================================================
+   ESPAÇAMENTO DO FORMULÁRIO
+   O rótulo ficava colado no campo anterior (0px) e a 10px do próprio
+   campo — o olho agrupava errado. Agora a distância entre grupos é
+   maior que a distância interna do grupo.
+   ================================================================ */
+.form{ gap:22px 18px; }
+.form .campo{ display:flex; flex-direction:column; gap:7px; }
+.form .campo label{ margin:0; line-height:1.25; }
+.form .campo input,
+.form .campo select,
+.form .campo textarea{ margin:0; width:100%; }
+
+/* campos que ocupam a linha inteira mantêm o mesmo respiro */
+.form .campo-full{ margin:0; }
+
+@media(max-width:767px){
+  .form{ gap:20px 0; padding:22px 18px; }
+  .form .campo{ gap:7px; }
+  /* aviso e botão ganham separação clara do último campo */
+  .form .form-regra{ margin-top:2px; }
+  .form button[type="submit"]{ margin-top:4px; }
+}
+
+/* o contêiner em grade é .form-grid (não .form) */
+.form .form-grid{ gap:22px 18px; }
+@media(max-width:767px){ .form .form-grid{ gap:20px 0; } }
+
+/* Os .campo são filhos diretos de <form class="form"> nas páginas de
+   área (o .form-grid só existe no modal). A separação entre grupos
+   precisa vir do próprio form. */
+form.form{ display:grid; grid-template-columns:1fr; gap:22px; }
+@media(min-width:760px){
+  form.form{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px 18px; }
+  form.form .campo-full,
+  form.form .form-regra,
+  form.form .form-aviso,
+  form.form .form-status,
+  form.form button[type="submit"]{ grid-column:1/-1; }
+}
+form.form > .campo{ display:flex; flex-direction:column; gap:7px; margin:0; }
+form.form > .form-regra,
+form.form > .form-aviso,
+form.form > .form-status{ margin:0; }
